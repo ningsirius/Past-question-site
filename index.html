@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EJU 题库系统</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="onSupabaseReady()"></script>
 <style>
 :root {
   --ink: #0f0e0d;
@@ -678,7 +678,12 @@ const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJ
 const ADMIN_CODES = ["gaoeju2026", "yaneju2026", "tongeju2026"];
 const LOCAL_KEY = "eju_local_v2";
 
-const sb = supabase.createClient(SB_URL, SB_KEY);
+let sb = null;
+
+function onSupabaseReady() {
+  sb = supabase.createClient(SB_URL, SB_KEY);
+  init();
+}
 
 // ══════════════════════════════════════════════════════
 // STATE
@@ -1044,7 +1049,8 @@ async function submitQ() {
         subject: sub, exam_year: yr, exam_session: sess,
         difficulty: diff, frequency: freq, topic: topic,
         q_text: text, q_image: imgDataQ || undefined,
-        ans_text: ansText, ans_image: imgDataA || undefined, notes: notes
+        ans_text: ansText, ans_image: imgDataA || undefined,
+        notes: notes || undefined
       };
       // Remove undefined keys
       Object.keys(updatePayload).forEach(k => updatePayload[k] === undefined && delete updatePayload[k]);
@@ -1077,7 +1083,8 @@ async function submitQ() {
         subject: sub, exam_year: yr, exam_session: sess,
         difficulty: diff, frequency: freq, topic: topic,
         q_text: text, q_image: imgDataQ || null,
-        ans_text: ansText, ans_image: imgDataA || null, notes: notes
+        ans_text: ansText, ans_image: imgDataA || null,
+        notes: notes || null
       };
       var { error: insertError } = await sb.from('eju_questions').insert([newQ]);
       if (insertError) {
@@ -1274,10 +1281,7 @@ document.querySelectorAll('.overlay').forEach(o => {
   });
 });
 
-// ══════════════════════════════════════════════════════
-// KICKOFF
-// ══════════════════════════════════════════════════════
-init();
+// init() is called by onSupabaseReady() once the Supabase library loads
 </script>
 </body>
 </html>
