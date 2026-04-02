@@ -15,6 +15,8 @@ header{background:var(--accent2);color:#fff;padding:0 2.5rem;display:flex;align-
 .logo{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none;}
 .logo-badge{background:var(--accent);color:#fff;padding:2px 8px;font-weight:700;border-radius:2px;}
 .admin-tag{font-size:12px;background:rgba(255,255,255,0.2);padding:2px 6px;border-radius:10px;margin-left:8px;display:none;}
+.btn-primary{background:var(--accent);color:#fff;border:none;padding:10px 20px;border-radius:var(--radius);cursor:pointer;font-weight:600;transition:0.2s; display:none;} /* 默认隐藏 */
+.btn-primary:hover{opacity:0.9;transform:scale(1.02);}
 .logo-title{font-size:1.1rem;font-weight:700;color:#fff;}
 .logo-sub{font-size:.68rem;color:rgba(255,255,255,.5);margin-top:2px;}
 nav{display:flex;gap:6px;}
@@ -38,8 +40,6 @@ nav{display:flex;gap:6px;}
 .filter-group select:focus,.filter-group input[type="text"]:focus{outline:none;border-color:var(--accent2);}
 .filter-actions{display:flex;align-items:flex-end;gap:8px;}
 .btn-search{background:var(--accent2);color:#fff;border:none;padding:8px 18px;border-radius:var(--radius);font-family:inherit;font-size:.85rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:background .15s;}
-.btn-primary{background:var(--accent);color:#fff;border:none;padding:10px 20px;border-radius:var(--radius);cursor:pointer;font-weight:600;transition:0.2s;}
-.btn-primary:hover{opacity:0.9;transform:scale(1.02);}
 input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid var(--border); border-radius: var(--radius); font-family: inherit; }
 .file-upload-box { border: 1px dashed var(--border); padding: 10px; border-radius: var(--radius); background: var(--cream); font-size: 14px; }
 .file-upload-box input[type="file"] { display: none; }
@@ -160,14 +160,17 @@ input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid var
 .toast.ok{background:#1a7a3c;}
 /* 网格布局 */
 .container{max-width:1400px;margin:0 auto;padding:2rem;}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
-.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:0.3s;cursor:pointer;position:relative;padding:1.2rem;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:24px;}
+.card{background:var(--card-bg);border:1px solid var(--border);border-radius:var(--radius);padding:1.2rem;cursor:pointer;transition:0.3s;position:relative;}
 .card:hover{transform:translateY(-5px);box-shadow:var(--shadow);}
-.card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+.card-header{display:flex;justify-content:space-between;margin-bottom:10px;}
+.badge{font-size:10px;padding:2px 6px;border-radius:2px;font-weight:bold;color:#fff;}
+.badge-off{background:var(--accent);}
+.badge-loc{background:var(--accent2);}
+.card-meta{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.card-title{font-weight:bold;font-size:1.1rem;margin-bottom:5px;}
 .card-tag{font-size:12px;color:var(--accent);font-weight:700;}
-.badge-official { background: var(--accent); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
-.badge-local { background: var(--accent2); color: #fff; font-size: 10px; padding: 2px 6px; border-radius: 4px; font-weight: bold; }
-.card-title{font-weight:700;font-size:1.1rem;margin-bottom:10px;line-height:1.4;}
+
 
 /* 弹窗样式 */
 .modal{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,14,13,0.8);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
@@ -176,10 +179,24 @@ input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid var
 .close-btn{position:absolute;top:20px;right:20px;cursor:pointer;font-size:1.5rem;}
 
 /* ── 弹窗遮罩 ── */
-.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,14,13,0.8);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(4px);}
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(15,14,13,0.85);z-index:1000;align-items:center;justify-content:center;backdrop-filter:blur(5px);}
 .modal-overlay.open{display:flex;}
-.modal-content{background:var(--paper);width:90%;max-width:800px;max-height:90vh;overflow-y:auto;padding:2rem;border-radius:var(--radius);position:relative;box-shadow: 0 10px 30px rgba(0,0,0,0.3);}
+.modal-content{background:var(--paper);width:95%;max-width:850px;max-height:92vh;overflow-y:auto;padding:2rem;border-radius:var(--radius);position:relative;}
 .close-btn{position:absolute;top:20px;right:20px;cursor:pointer;font-size:1.5rem;color:var(--muted);}
+
+.form-section{margin-bottom:1.5rem; background:rgba(0,0,0,0.02); padding:1.2rem; border-radius:4px; border:1px solid var(--border);}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px;margin-bottom:1rem;}
+label{display:block;font-size:12px;font-weight:bold;color:var(--muted);margin-bottom:5px;}
+input[type="text"],textarea,select{width:100%;padding:10px;border:1px solid var(--border);border-radius:var(--radius);font-family:inherit;font-size:14px;}
+.file-box{border:1px dashed var(--border);padding:10px;text-align:center;background:#fff;cursor:pointer;}
+
+/* 详情页选项卡 */
+.tabs{display:flex;gap:10px;border-bottom:2px solid var(--border);margin-bottom:15px;}
+.tab-btn{padding:10px 20px;background:none;border:none;cursor:pointer;font-weight:bold;color:var(--muted);}
+.tab-btn.active{color:var(--accent);border-bottom:3px solid var(--accent);margin-bottom:-2px;}
+.panel{display:none; line-height:1.6;}
+.panel.active{display:block;}
+.detail-img{max-width:100%; height:auto; border:1px solid var(--border); margin-top:10px;}
 
 /* 管理员模式条 */
 #admin-banner{background:#fff3cd;color:#856404;text-align:center;padding:8px;font-size:14px;display:none;border-bottom:1px solid #ffeeba;}
@@ -194,15 +211,15 @@ input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid var
   <div id="admin-banner">🚀 <b>管理员模式已开启</b>：您上传的题目将实时同步您上传的题目将实时同步为【官方题库】。</div>
 
 <header>
-  <div class="logo" onclick="handleLogoClick()">
-    <span class="logo-badge">EJU</span>
-    <span class="logo-text">题库系统 <span id="admin-tag" class="admin-tag">ADMIN</span></span>
+    <div class="logo" onclick="handleLogoClick()">
+        <span class="logo-badge">EJU</span>
+        <span class="logo-text">题库系统 <span id="admin-tag" class="admin-tag">ADMIN</span></span>
     <div>
       <div class="logo-title">EJU 题库系统</div>
       <div class="logo-sub">日本留学試験 過去問データベース</div>
     </div>
   </div>
-  <button class="btn-primary" onclick="openUploadModal()">＋ 录入题目</button>
+  <button id="upload-btn" class="btn-primary" onclick="openUploadModal()">＋ 录入题目</button>
   <nav>
     <button class="nav-btn active" onclick="showPage('browse')">📚 题目浏览</button>
     <button class="nav-btn" onclick="showPage('upload')">＋ 上传题目</button>
@@ -210,75 +227,127 @@ input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid var
 </header>
 
 <div class="container">
-    <div style="margin-bottom: 1rem; color: var(--muted);">共收录题目：<span id="total-count">0</span> 道</div>
-    <div class="grid" id="main-grid">
-      </div>
+    <div class="grid" id="main-grid"></div>
   </div>
   
   <div id="upload-modal" class="modal-overlay">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('upload-modal')">×</span>
-      <h2 id="upload-title" style="margin-bottom:1.5rem; color:var(--accent2);">录入题目</h2>
-      
-      <div style="display:grid; gap:15px;">
-        <div><label style="font-size:14px;font-weight:bold;">编号与知识点 *</label></div>
-        <div style="display:flex; gap:10px;">
-          <input type="text" id="up-id" placeholder="题目编号 (例: H30-1-P05)">
-          <input type="text" id="up-topic" placeholder="知识点 (例: 物理-力学)">
-        </div>
-  
-        <div><label style="font-size:14px;font-weight:bold;">题目正文</label></div>
-        <textarea id="up-q-text" placeholder="输入题目文字内容..." rows="3"></textarea>
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('upload-modal')">×</span>
+        <h2 style="margin-bottom:1.5rem;">教研题目解析录入</h2>
         
-        <div class="file-upload-box">
-          <label class="file-upload-label" for="up-q-file">🖼️ 选择题目图片 (选填)</label>
-          <span id="up-q-filename" style="margin-left:10px; color:var(--muted); font-size:12px;">未选择文件</span>
-          <input type="file" id="up-q-file" accept="image/*">
-          <input type="hidden" id="up-q-b64">
+        <div class="form-section">
+          <div class="form-grid">
+            <div>
+              <label>1. 难度</label>
+              <select id="up-diff">
+                <option value="极难"></option>
+                <option value="困难"></option>
+                <option value="中等" selected></option>
+                <option value="简单"></option>
+              </select>
+            </div>
+            <div>
+              <label>2. 科目</label>
+              <select id="up-subject">
+                <option value="物理">物理</option>
+                <option value="化学">化学</option>
+                <option value="生物">生物</option>
+              </select>
+            </div>
+            <div>
+              <label>3. 考频</label>
+              <select id="up-freq">
+                <option value="高">高频</option>
+                <option value="中" selected>中频</option>
+                <option value="低">低频</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="form-grid">
+            <div>
+              <label>4. 考试年份</label>
+              <select id="up-year">
+                <option value="2025">2025年</option>
+                <option value="2024">2024年</option>
+                <option value="2023">2023年</option>
+                <option value="2022">2022年</option>
+                <option value="2021">2021年</option>
+                <option value="2020">2020年</option>
+                <option value="2019">2019年</option>
+                <option value="2018">2018年</option>
+                <option value="2017">2017年</option>
+                <option value="2016">2016年</option>
+                <option value="2015">2016年</option>
+                <option value="2014">2014年</option>
+                <option value="2013">2013年</option>
+                <option value="2012">2012年</option>
+                <option value="2011">2011年</option>
+                <option value="2010">2010年</option>
+                <option value="2009">2009年</option>
+                <option value="2008">2008年</option>
+                <option value="2007">2007年</option>
+                <option value="2006">2006年</option>
+                <option value="2005">2005年</option>
+                <option value="2004">2004年</option>
+                <option value="2003">2003年</option>
+                <option value="2002">2002年</option>
+                <option value="2001">2001年</option>
+              </select>
+            </div>
+            <div>
+              <label>5. 考试期数</label>
+              <select id="up-session">
+                <option value="第1回">第1回 (6月)</option>
+                <option value="第2回">第2回 (11月)</option>
+              </select>
+            </div>
+            <div>
+              <label>6. 题目编号 (必填)</label>
+              <input type="text" id="up-id" placeholder="如: Q15">
+            </div>
+          </div>
+          
+          <div>
+            <label>7. 知识点 (Topic)</label>
+            <input type="text" id="up-topic" placeholder="请详细填写知识点名称">
+          </div>
         </div>
-  
-        <hr style="border: 0; border-top: 1px dashed var(--border); margin: 10px 0;">
-  
-        <div><label style="font-size:14px;font-weight:bold;">答案解析</label></div>
-        <textarea id="up-a-text" placeholder="输入答案及解析文字..." rows="3"></textarea>
-  
-        <div class="file-upload-box">
-          <label class="file-upload-label" for="up-a-file">🖼️ 选择答案图片 (选填)</label>
-          <span id="up-a-filename" style="margin-left:10px; color:var(--muted); font-size:12px;">未选择文件</span>
-          <input type="file" id="up-a-file" accept="image/*">
-          <input type="hidden" id="up-a-b64">
+    
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+          <div>
+            <label>题目文本</label>
+            <textarea id="up-q-text" rows="4"></textarea>
+            <div class="file-box" onclick="document.getElementById('file-q').click()">点击上传题目图片</div>
+            <input type="file" id="file-q" style="display:none" accept="image/*">
+            <input type="hidden" id="b64-q">
+          </div>
+          <div>
+            <label>答案/解析文本</label>
+            <textarea id="up-a-text" rows="4"></textarea>
+            <div class="file-box" onclick="document.getElementById('file-a').click()">点击上传答案图片</div>
+            <input type="file" id="file-a" style="display:none" accept="image/*">
+            <input type="hidden" id="b64-a">
+          </div>
         </div>
-  
-        <button class="btn-primary" onclick="submitData()" style="margin-top:10px;">确认保存</button>
+    
+        <button class="btn-primary" id="save-btn" onclick="submitData()" style="display:block; width:100%; margin-top:20px; height:50px; font-size:1.1rem;">确认保存</button>
       </div>
     </div>
-  </div>
-  
-  <div id="detail-modal" class="modal-overlay">
-    <div class="modal-content">
-      <span class="close-btn" onclick="closeModal('detail-modal')">×</span>
-      <div style="margin-bottom: 10px;">
-          <span id="det-badge"></span>
-          <span id="det-topic" style="color:var(--accent); font-weight:bold; font-size:14px; margin-left:10px;"></span>
-      </div>
-      <h2 id="det-id" style="margin-bottom:1.5rem; border-bottom:1px solid var(--border); padding-bottom:10px;"></h2>
-  
-      <div class="tabs">
-          <button class="tab-btn active" id="tab-btn-q" onclick="switchTab('q')">📝 题目</button>
-          <button class="tab-btn" id="tab-btn-a" onclick="switchTab('a')">💡 答案解析</button>
-      </div>
-  
-      <div id="panel-q" class="tab-panel active">
-          <p id="det-q-text" style="line-height:1.6; white-space:pre-wrap;"></p>
-          <div id="det-q-img-box"></div>
-      </div>
-  
-      <div id="panel-a" class="tab-panel">
-          <p id="det-a-text" style="line-height:1.6; white-space:pre-wrap;"></p>
-          <div id="det-a-img-box"></div>
+    <div id="detail-modal" class="modal-overlay">
+      <div class="modal-content">
+        <span class="close-btn" onclick="closeModal('detail-modal')">×</span>
+        <div id="det-header" style="margin-bottom:15px;"></div>
+        <h2 id="det-id" style="margin-bottom:10px;"></h2>
+        <div class="tabs">
+          <button class="tab-btn active" onclick="switchTab('q', this)">题目内容</button>
+          <button class="tab-btn" onclick="switchTab('a', this)">答案解析</button>
+        </div>
+        <div id="panel-q" class="panel active"></div>
+        <div id="panel-a" class="panel"></div>
       </div>
     </div>
-  </div>
+
 <div class="main">
   <div id="page-browse" class="page active">
     <div class="hero">
@@ -414,171 +483,127 @@ input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid var
 <div class="toast" id="toast"></div>
 
 <script>
+// ── 1. 核心配置 (请务必填入您的真实信息) ──────────────────────
+const SB_URL = "https://domnntudslajrpynwhaf.supabase.co"; 
+const SB_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRvbW5udHVkc2xhanJweW53aGFmIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUwOTAyODYsImV4cCI6MjA5MDY2NjI4Nn0.thzun-zvW26cEdKRcYacEAzMHlcbjTgnrldobD6kFmw";
+const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
+
+const ADMIN_CODES = ["gaoeju2026", "yaneju2026", "tongeju2026"]; // 三个管理员的暗号
+const LOCAL_KEY = "eju_my_private_data";
+
 let isAdmin = false;
 let clickCount = 0;
-let allQuestions = []; // 存放所有（云端+本地）题目的统一数组
+let allQuestions = [];
 
-// ── 2. 初始化与加载逻辑 ────────────────────────────────────────
+// ── 初始化 ──
 async function init() {
-    // A. 拉取云端官方数据
-    const { data: cloudData } = await supabaseClient
-        .from('eju_questions')
-        .select('*')
-        .order('created_at', { ascending: false });
-
-    // 标准化云端数据格式
-    const officialQuestions = (cloudData || []).map(q => ({
-        id: q.id, topic: q.topic, qText: q.q_text, qImage: q.q_image, 
-        ansText: q.ans_text, ansImage: q.ans_image, isOfficial: true
-    }));
-
-    // B. 拉取本地草稿数据
-    const localData = JSON.parse(localStorage.getItem(LOCAL_KEY) || "[]").map(q => ({
-        ...q, isOfficial: false
-    }));
-
-    // C. 合并并渲染
-    allQuestions = [...officialQuestions, ...localData];
+    const { data } = await supabaseClient.from('eju_questions').select('*').order('created_at',{ascending:false});
+    const cloud = (data || []).map(q => ({...q, isOfficial: true}));
+    const local = JSON.parse(localStorage.getItem('eju_local') || "[]").map(q => ({...q, isOfficial: false}));
+    allQuestions = [...cloud, ...local];
     renderGrid();
-    setupFileInputs();
+    bindFiles();
 }
 
 function renderGrid() {
-    const grid = document.getElementById('main-grid');
-    document.getElementById('total-count').innerText = allQuestions.length;
-    
-    grid.innerHTML = allQuestions.map(q => `
+    document.getElementById('main-grid').innerHTML = allQuestions.map(q => `
         <div class="card" onclick="openDetail('${q.id}')">
             <div class="card-header">
-                <span class="card-tag">${q.topic}</span>
-                <span class="${q.isOfficial ? 'badge-official' : 'badge-local'}">
-                    ${q.isOfficial ? '官方' : '本地'}
-                </span>
+                <span class="badge ${q.isOfficial?'badge-off':'badge-loc'}">${q.isOfficial?'官方':'本地'}</span>
+                <span style="font-size:12px; color:var(--accent); font-weight:bold;">${q.subject || ''}</span>
             </div>
+            <div class="card-meta">${q.exam_year || ''} ${q.exam_session || ''}</div>
             <div class="card-title">${q.id}</div>
-            <p style="font-size:14px; color:var(--muted); line-height:1.6;">
-                ${q.qText ? q.qText.substring(0,50) + '...' : '🖼️ 包含图片题目'}
-            </p>
+            <div style="font-size:13px; color:var(--muted);">${q.topic || ''}</div>
         </div>
     `).join('');
 }
 
-// ── 3. 真实图片转 Base64 逻辑 ────────────────────────────────────
-function setupFileInputs() {
-    const setupFile = (inputId, filenameId, hiddenId) => {
-        document.getElementById(inputId).addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if(!file) return;
-            document.getElementById(filenameId).innerText = "✅ " + file.name;
-            const reader = new FileReader();
-            reader.onload = function(event) {
-                document.getElementById(hiddenId).value = event.target.result; // 存入隐藏框
-            };
-            reader.readAsDataURL(file);
-        });
-    };
-    setupFile('up-q-file', 'up-q-filename', 'up-q-b64');
-    setupFile('up-a-file', 'up-a-filename', 'up-a-b64');
-}
-
-// ── 4. 提交保存逻辑 ────────────────────────────────────────────
+// ── 核心逻辑 ──
 async function submitData() {
-    const newQ = {
+    const btn = document.getElementById('save-btn');
+    const q = {
         id: document.getElementById('up-id').value,
+        difficulty: document.getElementById('up-diff').value,
+        subject: document.getElementById('up-subject').value,
+        exam_year: document.getElementById('up-year').value,
+        exam_session: document.getElementById('up-session').value,
+        frequency: document.getElementById('up-freq').value,
         topic: document.getElementById('up-topic').value,
-        qText: document.getElementById('up-q-text').value,
-        qImage: document.getElementById('up-q-b64').value, // 读取转换好的Base64
-        ansText: document.getElementById('up-a-text').value,
-        ansImage: document.getElementById('up-a-b64').value
+        q_text: document.getElementById('up-q-text').value,
+        q_image: document.getElementById('b64-q').value,
+        ans_text: document.getElementById('up-a-text').value,
+        ans_image: document.getElementById('b64-a').value
     };
 
-    if(!newQ.id || !newQ.topic) return alert("请至少填写编号和知识点");
+    if(!q.id) return alert("题目编号不能为空");
+    btn.innerText = "处理中...";
+    btn.disabled = true;
 
-    if (isAdmin) {
-        // 映射为数据库字段格式并上传
-        const dbEntry = {
-            id: newQ.id, topic: newQ.topic, 
-            q_text: newQ.qText, q_image: newQ.qImage, 
-            ans_text: newQ.ansText, ans_image: newQ.ansImage, author: 'ADMIN'
-        };
-        const { error } = await supabaseClient.from('eju_questions').insert([dbEntry]);
-        if (error) alert("同步失败: " + error.message);
-        else alert("已作为【官方题库】上传云端！");
+    if(isAdmin) {
+        const { error } = await supabaseClient.from('eju_questions').insert([q]);
+        if(error) alert("云端保存失败: " + error.message);
+        else alert("官方题库已更新");
     } else {
-        const localData = JSON.parse(localStorage.getItem(LOCAL_KEY) || "[]");
-        localData.push(newQ);
-        localStorage.setItem(LOCAL_KEY, JSON.stringify(localData));
-        alert("已保存至个人【本地草稿】。");
+        const local = JSON.parse(localStorage.getItem('eju_local') || "[]");
+        local.push(q);
+        localStorage.setItem('eju_local', JSON.stringify(local));
+        alert("已保存到本地草稿");
     }
     
-    closeModal('upload-modal');
-    init(); // 重新加载数据刷新列表
+    location.reload();
 }
 
-// ── 5. 详情页展示逻辑 ────────────────────────────────────────────
-function openDetail(targetId) {
-    const q = allQuestions.find(item => item.id === targetId);
+function openDetail(id) {
+    const q = allQuestions.find(x => x.id === id);
     if(!q) return;
-
-    // 填充头部信息
     document.getElementById('det-id').innerText = q.id;
-    document.getElementById('det-topic').innerText = q.topic;
+    document.getElementById('det-header').innerHTML = `
+        <span class="badge ${q.isOfficial?'badge-off':'badge-loc'}" style="margin-right:10px;">${q.isOfficial?'官方':'本地'}</span>
+        <b>${q.subject}</b> | 难度: ${q.difficulty} | 考频: ${q.frequency} | ${q.exam_year} ${q.exam_session}
+        <div style="color:var(--accent); margin-top:5px;">知识点: ${q.topic}</div>
+    `;
+    document.getElementById('panel-q').innerHTML = `<p>${q.q_text||''}</p>${q.q_image?`<img src="${q.q_image}" class="detail-img">`:''}`;
+    document.getElementById('panel-a').innerHTML = `<p>${q.ans_text||''}</p>${q.ans_image?`<img src="${q.ans_image}" class="detail-img">`:''}`;
     
-    const badge = document.getElementById('det-badge');
-    badge.className = q.isOfficial ? 'badge-official' : 'badge-local';
-    badge.innerText = q.isOfficial ? '官方' : '本地';
-
-    // 填充题目内容
-    document.getElementById('det-q-text').innerText = q.qText || "无文字内容";
-    document.getElementById('det-q-img-box').innerHTML = q.qImage ? `<img src="${q.qImage}" class="detail-img">` : '';
-
-    // 填充答案内容
-    document.getElementById('det-a-text').innerText = q.ansText || (q.ansImage ? "" : "暂无解析文本");
-    document.getElementById('det-a-img-box').innerHTML = q.ansImage ? `<img src="${q.ansImage}" class="detail-img">` : '';
-
-    switchTab('q'); // 默认显示题目卡
     document.getElementById('detail-modal').classList.add('open');
 }
 
-function switchTab(tab) {
-    document.getElementById('tab-btn-q').classList.toggle('active', tab === 'q');
-    document.getElementById('tab-btn-a').classList.toggle('active', tab === 'a');
-    document.getElementById('panel-q').classList.toggle('active', tab === 'q');
-    document.getElementById('panel-a').classList.toggle('active', tab === 'a');
-}
-
-// ── 6. 权限与弹窗控制 ────────────────────────────────────────
+// ── 辅助功能 ──
 function handleLogoClick() {
     clickCount++;
     if(clickCount >= 5) {
-        const pw = prompt("请输入教研管理员暗号：");
-        if(ADMIN_CODES.includes(pw)) {
+        if(prompt("教研暗号") === "eju2026") {
             isAdmin = true;
             document.getElementById('admin-banner').style.display = 'block';
             document.getElementById('admin-tag').style.display = 'inline-block';
-            alert("管理员权限已开启！");
+            document.getElementById('upload-btn').style.display = 'block';
+            document.getElementById('save-btn').style.display = 'block';
         }
         clickCount = 0;
     }
 }
 
-function openUploadModal() { 
-    // 清空上次填写的表单
-    ['up-id','up-topic','up-q-text','up-q-b64','up-a-text','up-a-b64'].forEach(id => document.getElementById(id).value = '');
-    document.getElementById('up-q-filename').innerText = "未选择文件";
-    document.getElementById('up-a-filename').innerText = "未选择文件";
-    document.getElementById('upload-modal').classList.add('open'); 
+function bindFiles() {
+    const setup = (fId, bId) => {
+        document.getElementById(fId).onchange = e => {
+            const reader = new FileReader();
+            reader.onload = ev => document.getElementById(bId).value = ev.target.result;
+            reader.readAsDataURL(e.target.files[0]);
+        };
+    };
+    setup('file-q', 'b64-q'); setup('file-a', 'b64-a');
 }
 
-function closeModal(modalId) { 
-    document.getElementById(modalId).classList.remove('open'); 
+function switchTab(t, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('panel-' + t).classList.add('active');
 }
 
-window.onload = init;
-
-// 弹窗控制
 function openUploadModal() { document.getElementById('upload-modal').classList.add('open'); }
-function closeModal() { document.getElementById('upload-modal').classList.remove('open'); }
+function closeModal(m) { document.getElementById(m).classList.remove('open'); }
 
 window.onload = init;
 
