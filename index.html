@@ -90,7 +90,7 @@ nav { display: flex; gap: 6px; }
   gap: 2rem; position: relative; overflow: hidden;
 }
 .hero::before {
-  content: 'EJU';
+  content: '理科';
   font-size: 7rem; font-weight: 900;
   color: rgba(255,255,255,.04);
   position: absolute; right: 2rem; top: 50%;
@@ -459,32 +459,7 @@ nav { display: flex; gap: 6px; }
         </select>
       </div>
       <div class="filter-group"><label>年份</label>
-        <select id="f-year"><option value="">全部年份</option>
-          <option value="2025">2025年</option><option value="2025">2025年</option>
-          <option value="2024">2024年</option>
-          <option value="2023">2023年</option>
-          <option value="2022">2022年</option>
-          <option value="2021">2021年</option>
-          <option value="2020">2020年</option>
-          <option value="2019">2019年</option>
-          <option value="2018">2018年</option>
-          <option value="2017">2017年</option>
-          <option value="2016">2016年</option>
-          <option value="2015">2016年</option>
-          <option value="2014">2014年</option>
-          <option value="2013">2013年</option>
-          <option value="2012">2012年</option>
-          <option value="2011">2011年</option>
-          <option value="2010">2010年</option>
-          <option value="2009">2009年</option>
-          <option value="2008">2008年</option>
-          <option value="2007">2007年</option>
-          <option value="2006">2006年</option>
-          <option value="2005">2005年</option>
-          <option value="2004">2004年</option>
-          <option value="2003">2003年</option>
-          <option value="2002">2002年</option>
-          <option value="2001">2001年</option></select>
+        <select id="f-year"><option value="">全部年份</option></select>
       </div>
       <div class="filter-group"><label>考试场次</label>
         <select id="f-sess">
@@ -567,7 +542,7 @@ nav { display: flex; gap: 6px; }
     </div>
     <div class="modal-body">
       <div class="admin-upload-notice" id="admin-upload-notice" style="display:none;">
-        ☁️ <b>管理员上传</b>：此题目将同步至官方题库，对所有用户实时可见。
+        ☁️ <b>管理员上传</b>：此题目将同步至 Supabase 官方题库，对所有用户实时可见。
       </div>
       <div class="f-grid3">
         <div class="f-row"><label>科目 <span class="req">*</span></label>
@@ -578,34 +553,7 @@ nav { display: flex; gap: 6px; }
           </select>
         </div>
         <div class="f-row"><label>年份 <span class="req">*</span></label>
-          <select id="u-year">
-              <option value="">请选择…</option>
-              <option value="2025">2025年</option>
-              <option value="2024">2024年</option>
-              <option value="2023">2023年</option>
-              <option value="2022">2022年</option>
-              <option value="2021">2021年</option>
-              <option value="2020">2020年</option>
-              <option value="2019">2019年</option>
-              <option value="2018">2018年</option>
-              <option value="2017">2017年</option>
-              <option value="2016">2016年</option>
-              <option value="2015">2016年</option>
-              <option value="2014">2014年</option>
-              <option value="2013">2013年</option>
-              <option value="2012">2012年</option>
-              <option value="2011">2011年</option>
-              <option value="2010">2010年</option>
-              <option value="2009">2009年</option>
-              <option value="2008">2008年</option>
-              <option value="2007">2007年</option>
-              <option value="2006">2006年</option>
-              <option value="2005">2005年</option>
-              <option value="2004">2004年</option>
-              <option value="2003">2003年</option>
-              <option value="2002">2002年</option>
-              <option value="2001">2001年</option>
-          </select>
+          <select id="u-year"></select>
         </div>
         <div class="f-row"><label>考试场次 <span class="req">*</span></label>
           <select id="u-sess">
@@ -882,7 +830,7 @@ function activateAdminMode() {
   document.getElementById('btn-admin-upload').style.display = 'inline-flex';
   document.getElementById('upload-intro-text').innerHTML =
     '请上传 EJU 历年真题（图片或文字均可）。<br>' +
-    '🔴 <b>管理员上传</b>：同步至官方题库，所有用户可见。<br>' +
+    '🔴 <b>管理员上传</b>：同步至 Supabase 官方题库，所有用户可见。<br>' +
     '🔵 <b>本地上传</b>：仅保存在您的浏览器，其他用户不可见。';
   // Edit/delete buttons now show for official questions too (admin can manage them)
   applyFilters();
@@ -901,21 +849,14 @@ function updateStats() {
 // FILTER / RENDER
 // ══════════════════════════════════════════════════════
 function populateYears() {
-  var sel = document.getElementById('f-year');   // 筛选栏的年份
-  var usel = document.getElementById('u-year');  // 上传模态框的年份
-
-  var opts = '<option value="">全部年份</option>';
-  var uopts = '<option value="">请选择…</option>';
-  
-  // 循环生成 2025 到 2001 年的选项
-  for (var y = 2025; y >= 2001; y--) {
-    opts += `<option value="${y}">${y}年</option>`;
-    uopts += `<option value="${y}">${y}年</option>`;
+  var sel = document.getElementById('f-year');
+  var usel = document.getElementById('u-year');
+  var yopts = '<option value="">请选择…</option>';
+  for (var y = 2025; y >= 2002; y--) {
+    sel.innerHTML += `<option value="${y}">${y}年</option>`;
+    yopts += `<option value="${y}">${y}年</option>`;
   }
-  
-  // 关键：必须分别赋值给两个对应的 DOM 元素
-  if (sel) sel.innerHTML = opts;
-  if (usel) usel.innerHTML = uopts;
+  usel.innerHTML = yopts;
 }
 
 function setSrcFilter(src) {
@@ -1113,9 +1054,20 @@ async function submitQ() {
       };
       // Remove undefined keys
       Object.keys(updatePayload).forEach(k => updatePayload[k] === undefined && delete updatePayload[k]);
-      var { error } = await sb.from('eju_questions').update(updatePayload).eq('id', editingId);
-      if (error) {
-        toast('云端更新失败: ' + error.message, true);
+
+      var updatePromise = sb.from('eju_questions').update(updatePayload).eq('id', editingId);
+      var updateTimeout = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('请求超时（20秒），请检查网络后重试')), 20000)
+      );
+      var updateResult;
+      try {
+        updateResult = await Promise.race([updatePromise, updateTimeout]);
+      } catch(e) {
+        toast('云端更新失败: ' + e.message, true);
+        submitBtn.disabled = false; submitBtn.textContent = origText; return;
+      }
+      if (updateResult.error) {
+        toast('云端更新失败: ' + updateResult.error.message, true);
         submitBtn.disabled = false; submitBtn.textContent = origText; return;
       }
       await loadOfficialQuestions();
@@ -1135,9 +1087,8 @@ async function submitQ() {
     closeOv('ov-upload');
     toast('题目修改已保存！', false, true);
   } else {
-    // NEW question
+    // NEW question — admin cloud upload
     if (isAdminUpload && isAdmin) {
-      // Upload to Supabase
       var newQ = {
         subject: sub, exam_year: yr, exam_session: sess,
         difficulty: diff, frequency: freq, topic: topic,
@@ -1145,9 +1096,29 @@ async function submitQ() {
         ans_text: ansText, ans_image: imgDataA || null,
         notes: notes || null
       };
-      var { error: insertError } = await sb.from('eju_questions').insert([newQ]);
-      if (insertError) {
-        toast('云端上传失败: ' + insertError.message, true);
+
+      // Warn if image is still large after compression
+      var imgSize = (imgDataQ || '').length + (imgDataA || '').length;
+      if (imgSize > 400000) {
+        toast('⚠️ 图片较大（' + Math.round(imgSize/1024) + 'KB），上传可能较慢…');
+      }
+
+      // Wrap in a 20-second timeout so it doesn't hang forever
+      var insertPromise = sb.from('eju_questions').insert([newQ]);
+      var timeoutPromise = new Promise((_, reject) =>
+        setTimeout(() => reject(new Error('请求超时（20秒），请检查网络或缩小图片后重试')), 20000)
+      );
+
+      var result;
+      try {
+        result = await Promise.race([insertPromise, timeoutPromise]);
+      } catch(timeoutErr) {
+        toast('云端上传失败: ' + timeoutErr.message, true);
+        submitBtn.disabled = false; submitBtn.textContent = origText; return;
+      }
+
+      if (result.error) {
+        toast('云端上传失败: ' + result.error.message, true);
         submitBtn.disabled = false; submitBtn.textContent = origText; return;
       }
       await loadOfficialQuestions();
@@ -1278,16 +1249,41 @@ function renderMyUploads() {
 // ══════════════════════════════════════════════════════
 // FILE UPLOAD
 // ══════════════════════════════════════════════════════
+// Compress image via canvas → JPEG 800px max, quality 0.72 → keeps base64 well under 200KB
+function compressImage(file, callback) {
+  var reader = new FileReader();
+  reader.onload = function(ev) {
+    var img = new Image();
+    img.onload = function() {
+      var MAX = 800;
+      var w = img.width, h = img.height;
+      if (w > MAX) { h = Math.round(h * MAX / w); w = MAX; }
+      var canvas = document.createElement('canvas');
+      canvas.width = w; canvas.height = h;
+      canvas.getContext('2d').drawImage(img, 0, 0, w, h);
+      callback(canvas.toDataURL('image/jpeg', 0.72));
+    };
+    img.src = ev.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
 function onFileChange(e, which) {
   var file = e.target.files[0];
   if (!file) return;
-  if (file.size > 5 * 1024 * 1024) { toast('图片过大（最大 5MB）', true); return; }
-  var r = new FileReader();
-  r.onload = function(ev) {
-    if (which === 'q') { imgDataQ = ev.target.result; document.getElementById('dz-q-prev').innerHTML = `<img src="${imgDataQ}" alt="预览">`; }
-    else { imgDataA = ev.target.result; document.getElementById('dz-a-prev').innerHTML = `<img src="${imgDataA}" alt="预览">`; }
-  };
-  r.readAsDataURL(file);
+  if (file.size > 10 * 1024 * 1024) { toast('图片过大（最大 10MB）', true); return; }
+  var prevId = which === 'q' ? 'dz-q-prev' : 'dz-a-prev';
+  document.getElementById(prevId).innerHTML = '<span style="font-size:.75rem;color:var(--muted)">压缩中…</span>';
+  compressImage(file, function(compressed) {
+    var kb = Math.round(compressed.length * 0.75 / 1024);
+    if (which === 'q') {
+      imgDataQ = compressed;
+      document.getElementById('dz-q-prev').innerHTML = '<img src="' + compressed + '" alt="预览"><div style="font-size:.65rem;color:var(--muted);margin-top:3px;">压缩后约 ' + kb + 'KB</div>';
+    } else {
+      imgDataA = compressed;
+      document.getElementById('dz-a-prev').innerHTML = '<img src="' + compressed + '" alt="预览"><div style="font-size:.65rem;color:var(--muted);margin-top:3px;">压缩后约 ' + kb + 'KB</div>';
+    }
+  });
 }
 
 function setupDrop(dzId, which) {
