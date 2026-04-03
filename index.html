@@ -89,12 +89,12 @@ nav { display: flex; gap: 6px; }
   gap: 2rem; position: relative; overflow: hidden;
 }
 .hero::before {
-  content: '理科';
-  font-size: 7rem; font-weight: 900;
+  content: 'EJU';
+  font-size: 9rem; font-weight: 900;
   color: rgba(255,255,255,.04);
   position: absolute; right: 2rem; top: 50%;
   transform: translateY(-50%); pointer-events: none;
-  font-family: 'Noto Serif SC', serif;
+  font-family: 'JetBrains Mono', monospace;
 }
 .hero h1 { font-size: 1.6rem; font-weight: 700; line-height: 1.3; font-family: 'Noto Serif SC', serif; }
 .hero p { font-size: .85rem; color: rgba(255,255,255,.6); margin-top: .5rem; }
@@ -444,7 +444,8 @@ nav { display: flex; gap: 6px; }
           <option value="化学">化学</option>
           <option value="物理">物理</option>
           <option value="生物">生物</option>
-          <option value="数学">数学</option>
+          <option value="文数">文数</option>
+          <option value="理数">理数</option>
           <option value="综合科目">综合科目</option>
         </select>
       </div>
@@ -548,7 +549,7 @@ nav { display: flex; gap: 6px; }
           <select id="u-sub">
             <option value="">请选择…</option>
             <option>化学</option><option>物理</option><option>生物</option>
-            <option>数学</option><option>综合科目</option>
+            <option>文数</option><option>理数</option><option>综合科目</option>
           </select>
         </div>
         <div class="f-row"><label>年份 <span class="req">*</span></label>
