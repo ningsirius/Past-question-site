@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EJU 题库系统</title>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="onSupabaseReady()"></script>
 <style>
 :root {
   --ink: #0f0e0d;
@@ -1118,6 +1117,7 @@ async function submitQ() {
       }
 
       if (result.error) {
+        console.error('Supabase insert error full detail:', result.error);
         toast('云端上传失败: ' + result.error.message, true);
         submitBtn.disabled = false; submitBtn.textContent = origText; return;
       }
@@ -1338,5 +1338,7 @@ document.querySelectorAll('.overlay').forEach(o => {
 
 // init() is called by onSupabaseReady() once the Supabase library loads
 </script>
+<!-- Supabase loaded LAST so onSupabaseReady() is already defined when onload fires -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="onSupabaseReady()"></script>
 </body>
 </html>
